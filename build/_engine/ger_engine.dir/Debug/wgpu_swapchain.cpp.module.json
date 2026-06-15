@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "ger_engine.dir\\Debug\\wgpu_swapchain.obj",
+            "outputs": [
+                "C:\\Users\\Rebon402\\Documents\\project-github\\GameEngineRuntime\\build\\_engine\\Debug\\ger_engine.pdb",
+                "ger_engine.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

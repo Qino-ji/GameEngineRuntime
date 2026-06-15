@@ -1,0 +1,18 @@
+{
+    "name": "ger_runtime",
+    "description": "GameEngineRuntime Final Executable",
+    "authors": ["GameEngineRuntime"],
+    "homepage": "",
+    "license": "MIT",
+    "targetType": "executable",
+    "sourcePaths": ["source"],
+    "importPaths": ["source"],
+    "dependencies": {
+        "ger_api": "../_api",
+        "ger_2d": "../_2d"
+    },
+    "configurations": [
+        {"name": "debug", "buildOptions": ["debugMode", "debugInfo"]},
+        {"name": "release", "buildOptions": ["releaseMode", "optimize", "inline"]}
+    ]
+}

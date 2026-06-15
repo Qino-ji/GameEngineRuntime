@@ -1,0 +1,17 @@
+{
+    "name": "ger_2d",
+    "description": "GameEngineRuntime 2D Engine",
+    "authors": ["GameEngineRuntime"],
+    "homepage": "",
+    "license": "MIT",
+    "targetType": "library",
+    "sourcePaths": ["source"],
+    "importPaths": ["source"],
+    "dependencies": {
+        "ger_api": "../_api"
+    },
+    "configurations": [
+        {"name": "debug", "buildOptions": ["debugMode", "debugInfo"]},
+        {"name": "release", "buildOptions": ["releaseMode", "optimize", "inline"]}
+    ]
+}

@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/cmake_install.cmake",
+		"C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/cmake_install.cmake",
+		"C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_engine/cmake_install.cmake",
+		"C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

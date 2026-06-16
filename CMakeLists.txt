@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 project(GameEngineRuntime)
 
-add_subdirectory(_core)
-add_subdirectory(_engine)
-add_subdirectory(_lua_host)
+add_subdirectory(core)
+add_subdirectory(engine)
+add_subdirectory(lua_host)

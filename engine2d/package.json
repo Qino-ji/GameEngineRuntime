@@ -8,6 +8,6 @@
     "sourcePaths": ["source"],
     "importPaths": ["source"],
     "dependencies": {
-        "ger_api": {"path": "../_api"}
+        "ger_api": {"path": "../api"}
     }
 }

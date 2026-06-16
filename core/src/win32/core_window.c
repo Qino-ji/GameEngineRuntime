@@ -4,7 +4,6 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 struct ger_window {
@@ -46,7 +45,6 @@ ger_error_t ger_window_create(ger_window_desc_t* desc, ger_window_t** out) {
     if (!RegisterClassExA(&wc)) {
         DWORD err = GetLastError();
         if (err != ERROR_CLASS_ALREADY_EXISTS) {
-            fprintf(stderr, "[ger] RegisterClassExA failed: %lu\n", err);
             return GER_ERR_UNKNOWN;
         }
     }
@@ -63,9 +61,6 @@ ger_error_t ger_window_create(ger_window_desc_t* desc, ger_window_t** out) {
         r.right - r.left, r.bottom - r.top,
         0, 0, inst, 0);
     if (!hwnd) {
-        DWORD err = GetLastError();
-        fprintf(stderr, "[ger] CreateWindowExA failed: %lu style=0x%08lx size=%ldx%ld\n",
-            err, style, desc->width, desc->height);
         return GER_ERR_UNKNOWN;
     }
 

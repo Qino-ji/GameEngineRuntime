@@ -5,28 +5,28 @@ all: debug
 debug:
 	cmake -B build/debug -DCMAKE_BUILD_TYPE=Debug -G Ninja
 	cmake --build build/debug
-	cd _api && dub build --config=debug
-	cd _runtime && dub build --config=debug
+	cd api && dub build --config=debug
+	cd runtime && dub build --config=debug
 
 release:
 	cmake -B build/release -DCMAKE_BUILD_TYPE=Release -G Ninja
 	cmake --build build/release
-	cd _api && dub build --config=release
-	cd _runtime && dub build --config=release
+	cd api && dub build --config=release
+	cd runtime && dub build --config=release
 
 clean:
 	rm -rf build
-	cd _core && rm -rf build
-	cd _engine && rm -rf build
-	cd _lua_host && rm -rf build
-	cd _api && dub clean
-	cd _runtime && dub clean
-	cd _2d && dub clean
+	cd core && rm -rf build
+	cd engine && rm -rf build
+	cd lua_host && rm -rf build
+	cd api && dub clean
+	cd runtime && dub clean
+	cd engine2d && dub clean
 
 test:
 	cd build/debug && ctest --output-on-failure
-	cd _api && dub test
-	cd _2d && dub test
+	cd api && dub test
+	cd engine2d && dub test
 
 package: release
 	mkdir -p dist

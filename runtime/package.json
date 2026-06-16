@@ -8,12 +8,12 @@
     "sourcePaths": ["source"],
     "importPaths": ["source"],
     "dependencies": {
-        "ger_api": {"path": "../_api"},
-        "ger_2d": {"path": "../_2d"}
+        "ger_api": {"path": "../api"},
+        "ger_2d": {"path": "../engine2d"}
     },
     "dflags": [
-        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/Debug",
-        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/Debug",
+        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/core/Debug",
+        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/lua_host/Debug",
         "-L/LIBPATH:C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/lib/x64",
         "-L/LIBPATH:C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/ucrt/x64",
         "-L/LIBPATH:C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/um/x64",

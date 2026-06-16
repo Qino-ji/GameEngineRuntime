@@ -6,24 +6,34 @@ WGPUPipeline WGPUPipeline::create(const WGPUPipelineDesc& desc) {
         return pipeline;
     }
 
-    WGPUColorTargetState color_target = {};
-    color_target.format = desc.color_format;
-    if (desc.blend_enabled) {
-        WGPUBlendComponent blend_component = {};
-        blend_component.operation = WGPUBlendOperation_Add;
-        blend_component.srcFactor = WGPUBlendFactor_SrcAlpha;
-        blend_component.dstFactor = WGPUBlendFactor_OneMinusSrcAlpha;
-        color_target.blend = &blend_component;
-    }
+    WGPUBlendComponent color_blend = {};
+    color_blend.operation = WGPUBlendOperation_Add;
+    color_blend.srcFactor = WGPUBlendFactor_SrcAlpha;
+    color_blend.dstFactor = WGPUBlendFactor_OneMinusSrcAlpha;
 
-    WGPURenderPipelineDescriptor pipeline_desc = {};
+    WGPUBlendComponent alpha_blend = color_blend;
+
+    WGPUBlendState blend_state = {};
+    blend_state.color = color_blend;
+    blend_state.alpha = alpha_blend;
+
+    WGPUColorTargetState color_target = WGPU_COLOR_TARGET_STATE_INIT;
+    color_target.format = desc.color_format;
+    color_target.blend = desc.blend_enabled ? &blend_state : nullptr;
+
+    WGPUStringView main_entry = { "main", WGPU_STRLEN };
+
+    WGPUFragmentState fragment_state = WGPU_FRAGMENT_STATE_INIT;
+    fragment_state.module = desc.shader;
+    fragment_state.entryPoint = main_entry;
+    fragment_state.targetCount = 1;
+    fragment_state.targets = &color_target;
+
+    WGPURenderPipelineDescriptor pipeline_desc = WGPU_RENDER_PIPELINE_DESCRIPTOR_INIT;
     pipeline_desc.layout = nullptr;
     pipeline_desc.vertex.module = desc.shader;
-    pipeline_desc.vertex.entryPoint = "main";
-    pipeline_desc.fragment.module = desc.shader;
-    pipeline_desc.fragment.entryPoint = "main";
-    pipeline_desc.fragment.targetCount = 1;
-    pipeline_desc.fragment.targets = &color_target;
+    pipeline_desc.vertex.entryPoint = main_entry;
+    pipeline_desc.fragment = &fragment_state;
 
     pipeline.handle = wgpuDeviceCreateRenderPipeline(desc.device, &pipeline_desc);
     return pipeline;

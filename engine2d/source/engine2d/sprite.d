@@ -58,10 +58,10 @@ struct SpriteBatch {
 
         u32 idx = vertexCount;
         u32 packedColor = packColor(sp.color);
-        vertices[idx] = SpriteVertex(sp.position.x - sp.scale.x * 0.5f, sp.position.y - sp.scale.y * 0.5f, sp.uv[0], sp.uv[1], packedColor, sp.textureHandle);
-        vertices[idx + 1] = SpriteVertex(sp.position.x + sp.scale.x * 0.5f, sp.position.y - sp.scale.y * 0.5f, sp.uv[2], sp.uv[1], packedColor, sp.textureHandle);
-        vertices[idx + 2] = SpriteVertex(sp.position.x + sp.scale.x * 0.5f, sp.position.y + sp.scale.y * 0.5f, sp.uv[2], sp.uv[3], packedColor, sp.textureHandle);
-        vertices[idx + 3] = SpriteVertex(sp.position.x - sp.scale.x * 0.5f, sp.position.y + sp.scale.y * 0.5f, sp.uv[0], sp.uv[3], packedColor, sp.textureHandle);
+        vertices[idx] = SpriteVertex(sp.position.x - sp.scale.x * 0.5f, sp.position.y - sp.scale.y * 0.5f, sp.uv[0], sp.uv[1], packedColor, sp.textureHandle); // @suppress(dscanner.style.long_line)
+        vertices[idx + 1] = SpriteVertex(sp.position.x + sp.scale.x * 0.5f, sp.position.y - sp.scale.y * 0.5f, sp.uv[2], sp.uv[1], packedColor, sp.textureHandle); // @suppress(dscanner.style.long_line)
+        vertices[idx + 2] = SpriteVertex(sp.position.x + sp.scale.x * 0.5f, sp.position.y + sp.scale.y * 0.5f, sp.uv[2], sp.uv[3], packedColor, sp.textureHandle); // @suppress(dscanner.style.long_line)
+        vertices[idx + 3] = SpriteVertex(sp.position.x - sp.scale.x * 0.5f, sp.position.y + sp.scale.y * 0.5f, sp.uv[0], sp.uv[3], packedColor, sp.textureHandle); // @suppress(dscanner.style.long_line)
         indices[indexCount] = idx; indices[indexCount + 1] = idx + 1; indices[indexCount + 2] = idx + 2;
         indices[indexCount + 3] = idx; indices[indexCount + 4] = idx + 2; indices[indexCount + 5] = idx + 3;
         vertexCount += 4;

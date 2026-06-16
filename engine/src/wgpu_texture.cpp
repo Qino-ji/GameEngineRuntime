@@ -1,7 +1,7 @@
 #include "engine/wgpu_texture.hpp"
 
-WGPUTexture WGPUTexture::create_empty(WGPUDevice device, uint32_t width, uint32_t height) {
-    WGPUTexture texture = {};
+GpuTexture GpuTexture::create_empty(WGPUDevice device, uint32_t width, uint32_t height) {
+    GpuTexture texture = {};
     if (device == nullptr || width == 0 || height == 0) {
         return texture;
     }
@@ -29,13 +29,13 @@ WGPUTexture WGPUTexture::create_empty(WGPUDevice device, uint32_t width, uint32_
     return texture;
 }
 
-WGPUTexture WGPUTexture::load(WGPUDevice device, const char* path) {
+GpuTexture GpuTexture::load(WGPUDevice device, const char* path) {
     (void)device;
     (void)path;
     return {};
 }
 
-void WGPUTexture::destroy() {
+void GpuTexture::destroy() {
     if (sampler != nullptr) {
         wgpuSamplerRelease(sampler);
         sampler = nullptr;

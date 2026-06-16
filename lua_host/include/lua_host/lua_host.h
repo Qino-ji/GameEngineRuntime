@@ -7,6 +7,7 @@ typedef struct ger_lua_vm ger_lua_vm_t;
 
 ger_error_t ger_lua_vm_create(ger_lua_vm_t** out);
 void ger_lua_vm_destroy(ger_lua_vm_t* vm);
+void ger_lua_vm_sandbox(ger_lua_vm_t* vm);
 ger_error_t ger_lua_vm_load_string(ger_lua_vm_t* vm, const char* source);
 ger_error_t ger_lua_vm_load_file(ger_lua_vm_t* vm, const char* path);
 ger_error_t ger_lua_vm_call(ger_lua_vm_t* vm, const char* func_name, int nargs, int nresults);

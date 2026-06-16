@@ -1,4 +1,6 @@
 #include "lua_host/lua_host.h"
+#include "lua_host/lua_serializer.h"
+#include "lua_host/lua_bindings.h"
 #include <lua.h>
 #include <lauxlib.h>
 #include <lualib.h>
@@ -14,6 +16,9 @@ ger_error_t ger_lua_vm_create(ger_lua_vm_t** out) {
     vm->L = luaL_newstate();
     if (!vm->L) { free(vm); return GER_ERR_OUT_OF_MEMORY; }
     luaL_openlibs(vm->L);
+    ger_lua_serializer_init(vm->L);
+    ger_lua_vm_sandbox(vm);
+    ger_lua_bind_register_all(vm);
     *out = vm;
     return GER_OK;
 }
@@ -22,6 +27,31 @@ void ger_lua_vm_destroy(ger_lua_vm_t* vm) {
     if (!vm) return;
     if (vm->L) lua_close(vm->L);
     free(vm);
+}
+
+void ger_lua_vm_sandbox(ger_lua_vm_t* vm) {
+    if (!vm || !vm->L) return;
+    lua_State* L = vm->L;
+
+    lua_getglobal(L, "os");
+    if (lua_istable(L, -1)) {
+        lua_pushnil(L);
+        lua_setfield(L, -2, "execute");
+        lua_pushnil(L);
+        lua_setfield(L, -2, "remove");
+        lua_pushnil(L);
+        lua_setfield(L, -2, "rename");
+        lua_pushnil(L);
+        lua_setfield(L, -2, "tmpname");
+    }
+    lua_pop(L, 1);
+
+    lua_pushnil(L);
+    lua_setglobal(L, "io");
+    lua_pushnil(L);
+    lua_setglobal(L, "loadfile");
+    lua_pushnil(L);
+    lua_setglobal(L, "dofile");
 }
 
 ger_error_t ger_lua_vm_load_string(ger_lua_vm_t* vm, const char* source) {

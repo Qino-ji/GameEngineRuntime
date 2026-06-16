@@ -19,14 +19,14 @@ struct WGPUTextureInfo {
     WGPUTextureFormat format = WGPUTextureFormat_RGBA8UnormSrgb;
 };
 
-struct WGPUTexture {
+struct GpuTexture {
     WGPUTexture handle = nullptr;
     WGPUTextureView view = nullptr;
     WGPUSampler sampler = nullptr;
     WGPUTextureInfo info;
 
-    static WGPUTexture create_empty(WGPUDevice device, uint32_t width, uint32_t height);
-    static WGPUTexture load(WGPUDevice device, const char* path);
+    static GpuTexture create_empty(WGPUDevice device, uint32_t width, uint32_t height);
+    static GpuTexture load(WGPUDevice device, const char* path);
     void destroy();
     bool valid() const noexcept { return handle != nullptr; }
 };

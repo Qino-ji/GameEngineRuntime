@@ -39,6 +39,7 @@ set(LUA_CORE_SRC
 set(LUA_SRC
     src/lua_host.c
     src/lua_bindings.c
+    src/lua_serializer.c
 )
 
 add_library(lua STATIC ${LUA_CORE_SRC})

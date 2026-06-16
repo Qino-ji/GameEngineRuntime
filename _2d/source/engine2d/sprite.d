@@ -10,7 +10,7 @@ struct Sprite {
     u8 layer;
     u8 visible;
     u32 textureHandle;
-    f32 uv[4];
+    f32[4] uv;
 
     static Sprite create() {
         Sprite s;

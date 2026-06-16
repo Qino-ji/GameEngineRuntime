@@ -7,10 +7,7 @@
     "targetType": "library",
     "sourcePaths": ["source"],
     "importPaths": ["source"],
-    "dependencies": {},
-    "pathDependencies": ["../_api"],
-    "configurations": [
-        {"name": "debug", "buildType": "debug"},
-        {"name": "release", "buildType": "release"}
-    ]
+    "dependencies": {
+        "ger_api": {"path": "../_api"}
+    }
 }

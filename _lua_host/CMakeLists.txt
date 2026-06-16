@@ -6,6 +6,7 @@ set(LUA_CORE_SRC
     ${CMAKE_SOURCE_DIR}/_deps/lua/lauxlib.c
     ${CMAKE_SOURCE_DIR}/_deps/lua/lbaselib.c
     ${CMAKE_SOURCE_DIR}/_deps/lua/lcode.c
+    ${CMAKE_SOURCE_DIR}/_deps/lua/lctype.c
     ${CMAKE_SOURCE_DIR}/_deps/lua/lcorolib.c
     ${CMAKE_SOURCE_DIR}/_deps/lua/ldblib.c
     ${CMAKE_SOURCE_DIR}/_deps/lua/ldebug.c

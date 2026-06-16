@@ -5,7 +5,11 @@ set(ENGINE_SRC
     src/wgpu_context.cpp
     src/wgpu_swapchain.cpp
     src/wgpu_shader.cpp
+    src/wgpu_pipeline.cpp
+    src/wgpu_texture.cpp
     src/render_graph.cpp
+    src/gpu_profiler.cpp
+    src/math_simd.cpp
 )
 
 add_library(ger_engine STATIC ${ENGINE_SRC})

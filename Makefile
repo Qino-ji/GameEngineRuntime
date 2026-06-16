@@ -5,14 +5,14 @@ all: debug
 debug:
 	cmake -B build/debug -DCMAKE_BUILD_TYPE=Debug -G Ninja
 	cmake --build build/debug
-	cd api && dub build --config=debug
-	cd runtime && dub build --config=debug
+	cd api && dub build --build=debug
+	cd runtime && dub build --build=debug
 
 release:
 	cmake -B build/release -DCMAKE_BUILD_TYPE=Release -G Ninja
 	cmake --build build/release
-	cd api && dub build --config=release
-	cd runtime && dub build --config=release
+	cd api && dub build --build=release
+	cd runtime && dub build --build=release
 
 clean:
 	rm -rf build
@@ -25,10 +25,10 @@ clean:
 
 test:
 	cd build/debug && ctest --output-on-failure
-	cd api && dub test
-	cd engine2d && dub test
+	cd api && dub test --build=debug
+	cd engine2d && dub test --build=debug
 
 package: release
 	mkdir -p dist
-	cp build/release/_runtime/ger_runtime dist/
+	cp build/release/runtime/ger_runtime dist/
 	strip dist/ger_runtime

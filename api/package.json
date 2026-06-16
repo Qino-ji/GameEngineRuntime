@@ -18,8 +18,4 @@
         "-Llua.lib",
         "-Lger_lua.lib"
     ],
-    "configurations": [
-        {"name": "debug", "buildOptions": ["debugMode", "debugInfo"]},
-        {"name": "release", "buildOptions": ["releaseMode", "optimize", "inline"]}
-    ]
 }

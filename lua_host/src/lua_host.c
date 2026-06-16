@@ -29,6 +29,10 @@ void ger_lua_vm_destroy(ger_lua_vm_t* vm) {
     free(vm);
 }
 
+lua_State* ger_lua_vm_get_state(ger_lua_vm_t* vm) {
+    return vm ? vm->L : NULL;
+}
+
 void ger_lua_vm_sandbox(ger_lua_vm_t* vm) {
     if (!vm || !vm->L) return;
     lua_State* L = vm->L;
@@ -75,6 +79,17 @@ ger_error_t ger_lua_vm_call(ger_lua_vm_t* vm, const char* func_name, int nargs, 
     int base = lua_gettop(vm->L) - nargs;
     lua_insert(vm->L, base);
     if (lua_pcall(vm->L, nargs, nresults, 0) != LUA_OK) return GER_ERR_UNKNOWN;
+    return GER_OK;
+}
+
+ger_error_t ger_lua_vm_call_with_number(ger_lua_vm_t* vm, const char* func_name, ger_f64 arg) {
+    lua_getglobal(vm->L, func_name);
+    if (!lua_isfunction(vm->L, -1)) {
+        lua_pop(vm->L, 1);
+        return GER_ERR_NOT_FOUND;
+    }
+    lua_pushnumber(vm->L, arg);
+    if (lua_pcall(vm->L, 1, 0, 0) != LUA_OK) return GER_ERR_UNKNOWN;
     return GER_OK;
 }
 

@@ -32,8 +32,9 @@ static void ensure_ger_table(lua_State* L) {
 }
 
 void ger_lua_bind_register_all(ger_lua_vm_t* vm) {
-    if (!vm || !vm->L) return;
-    lua_State* L = vm->L;
+    if (!vm) return;
+    lua_State* L = ger_lua_vm_get_state(vm);
+    if (!L) return;
 
     ensure_ger_table(L);
     lua_pushcfunction(L, ger_lua_log);

@@ -8,12 +8,15 @@ extern(C) {
 
     i32 ger_lua_vm_create(void** output);
     void ger_lua_vm_destroy(void* vm);
+    void ger_lua_vm_sandbox(void* vm);
     i32 ger_lua_vm_load_string(void* vm, const(char)* source);
     i32 ger_lua_vm_load_file(void* vm, const(char)* path);
     i32 ger_lua_vm_call(void* vm, const(char)* func_name, int nargs, int nresults);
+    i32 ger_lua_vm_call_with_number(void* vm, const(char)* func_name, f64 arg);
     void ger_lua_vm_push_number(void* vm, f64 val);
     void ger_lua_vm_push_string(void* vm, const(char)* str);
     void ger_lua_vm_register_func(void* vm, const(char)* name, LuaCCallback func);
+    void ger_lua_bind_register_all(void* vm);
 }
 
 class ScriptEngine {
@@ -22,6 +25,10 @@ class ScriptEngine {
     this() {
         auto err = ger_lua_vm_create(&_vm);
         assert(err == GER_OK);
+        if (_vm) {
+            ger_lua_vm_sandbox(_vm);
+            ger_lua_bind_register_all(_vm);
+        }
     }
 
     ~this() {
@@ -43,7 +50,16 @@ class ScriptEngine {
         assert(err == GER_OK, "Lua function call failed");
     }
 
+    void callNumber(string func, f64 arg) {
+        auto err = ger_lua_vm_call_with_number(_vm, func.toStringz, arg);
+        assert(err == GER_OK, "Lua function call with number failed");
+    }
+
     void registerFunc(string name, LuaCCallback func) {
         ger_lua_vm_register_func(_vm, name.toStringz, func);
+    }
+
+    void bindBuiltinApi() {
+        if (_vm) ger_lua_bind_register_all(_vm);
     }
 }

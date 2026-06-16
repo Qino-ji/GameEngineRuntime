@@ -10,10 +10,10 @@
     "dependencies": {},
     "pathDependencies": ["../_api", "../_2d"],
     "dflags-windows-msvc-ldc": [
-        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/Debug",
-        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/Debug",
-        "-Lger_core.lib",
-        "-Lger_lua.lib"
+        "/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/Debug",
+        "/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/Debug",
+        "ger_core.lib",
+        "ger_lua.lib"
     ],
     "configurations": [
         {"name": "debug", "buildType": "debug"},

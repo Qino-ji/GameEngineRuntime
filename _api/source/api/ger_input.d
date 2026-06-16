@@ -1,28 +1,28 @@
 module api.ger_input;
 
 import api.ger_types;
-import core_sys = core;
 
 extern(C) {
-    i32 ger_input_create(void** out);
-    void ger_input_destroy(void* in);
-    void ger_input_begin_frame(void* in);
-    void ger_input_end_frame(void* in);
-    u8 ger_input_is_key_down(void* in, int key);
-    u8 ger_input_is_key_pressed(void* in, int key);
-    u8 ger_input_is_key_released(void* in, int key);
-    void ger_input_get_mouse_pos(void* in, f32* x, f32* y);
-    void ger_input_get_mouse_delta(void* in, f32* dx, f32* dy);
-    f32 ger_input_get_scroll_delta(void* in);
-    u8 ger_input_is_mouse_down(void* in, int btn);
-    u8 ger_input_is_mouse_pressed(void* in, int btn);
+    i32 ger_input_create(void** output);
+    void ger_input_destroy(void* handle);
+    void ger_input_begin_frame(void* handle);
+    void ger_input_end_frame(void* handle);
+    u8 ger_input_is_key_down(void* handle, int key);
+    u8 ger_input_is_key_pressed(void* handle, int key);
+    u8 ger_input_is_key_released(void* handle, int key);
+    void ger_input_get_mouse_pos(void* handle, f32* x, f32* y);
+    void ger_input_get_mouse_delta(void* handle, f32* dx, f32* dy);
+    f32 ger_input_get_scroll_delta(void* handle);
+    u8 ger_input_is_mouse_down(void* handle, int btn);
+    u8 ger_input_is_mouse_pressed(void* handle, int btn);
 }
 
 class Input {
     private void* _handle;
 
     this() {
-        ger_input_create(&_handle);
+        auto err = ger_input_create(&_handle);
+        assert(err == GER_OK, "Input creation failed");
     }
 
     ~this() {

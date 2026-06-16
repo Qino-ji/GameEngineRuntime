@@ -1,6 +1,10 @@
 #include "core/core_memory.h"
 #include <stdlib.h>
 
+#if defined(GER_OS_WIN)
+#include <malloc.h>
+#endif
+
 void ger_arena_init(ger_arena_t* a, void* buffer, ger_u64 size) {
     a->base = buffer;
     a->capacity = size;
@@ -53,10 +57,20 @@ void* ger_pool_get(ger_pool_t* p, ger_i32 index) {
 void* ger_malloc_aligned(ger_u64 size, ger_u64 align) {
     void* ptr = 0;
     if (align < sizeof(void*)) align = sizeof(void*);
-    if (posix_memalign(&ptr, align, size) != 0) return 0;
+#if defined(GER_OS_WIN)
+    ptr = _aligned_malloc((size_t)size, (size_t)align);
     return ptr;
+#else
+    if (posix_memalign(&ptr, (size_t)align, (size_t)size) != 0) return 0;
+    return ptr;
+#endif
 }
 
 void ger_free_aligned(void* ptr) {
+    if (!ptr) return;
+#if defined(GER_OS_WIN)
+    _aligned_free(ptr);
+#else
     free(ptr);
+#endif
 }

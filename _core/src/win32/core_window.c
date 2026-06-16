@@ -4,6 +4,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdlib.h>
 
 struct ger_window {
     HWND hwnd;
@@ -73,6 +74,7 @@ ger_error_t ger_window_create(ger_window_desc_t* desc, ger_window_t** out) {
 void ger_window_destroy(ger_window_t* win) {
     if (!win) return;
     DestroyWindow(win->hwnd);
+    if (win->hdc) ReleaseDC(win->hwnd, win->hdc);
     free(win);
 }
 

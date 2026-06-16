@@ -34,6 +34,7 @@ ger_error_t ger_input_create(ger_input_t** out);
 void ger_input_destroy(ger_input_t* in);
 void ger_input_begin_frame(ger_input_t* in);
 void ger_input_end_frame(ger_input_t* in);
+void ger_input_set_key_state(ger_input_t* in, ger_key_t key, ger_u8 down);
 ger_u8 ger_input_is_key_down(ger_input_t* in, ger_key_t key);
 ger_u8 ger_input_is_key_pressed(ger_input_t* in, ger_key_t key);
 ger_u8 ger_input_is_key_released(ger_input_t* in, ger_key_t key);

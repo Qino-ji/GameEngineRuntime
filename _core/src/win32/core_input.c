@@ -3,6 +3,7 @@
 #if defined(GER_OS_WIN)
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdlib.h>
 
 struct ger_input {
     ger_u8 keys_down[GER_KEY_COUNT];

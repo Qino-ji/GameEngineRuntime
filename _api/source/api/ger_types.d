@@ -1,21 +1,37 @@
 module api.ger_types;
 
-import core_sys = core;
+alias i8 = byte;
+alias u8 = ubyte;
+alias i16 = short;
+alias u16 = ushort;
+alias i32 = int;
+alias u32 = uint;
+alias i64 = long;
+alias u64 = ulong;
+alias f32 = float;
+alias f64 = double;
 
-alias i8 = core_sys.ger_i8;
-alias u8 = core_sys.ger_u8;
-alias i16 = core_sys.ger_i16;
-alias u16 = core_sys.ger_u16;
-alias i32 = core_sys.ger_i32;
-alias u32 = core_sys.ger_u32;
-alias i64 = core_sys.ger_i64;
-alias u64 = core_sys.ger_u64;
-alias f32 = core_sys.ger_f32;
-alias f64 = core_sys.ger_f64;
+alias ger_error_t = i32;
+
+enum i32 GER_OK = 0;
+enum i32 GER_ERR_UNKNOWN = 1;
+enum i32 GER_ERR_OUT_OF_MEMORY = 2;
+enum i32 GER_ERR_INVALID_ARG = 3;
+enum i32 GER_ERR_NOT_FOUND = 4;
+enum i32 GER_ERR_IO = 5;
+enum i32 GER_ERR_UNSUPPORTED = 6;
+enum i32 GER_ERR_ALREADY_EXISTS = 7;
+enum i32 GER_ERR_TIMEOUT = 8;
 
 struct Vec2 {
     f32 x;
     f32 y;
+}
+
+unittest {
+    auto v = Vec2(1, 2);
+    assert(v.x == 1);
+    assert(v.y == 2);
 }
 
 struct Vec3 {
@@ -29,6 +45,14 @@ struct Color {
     u8 g;
     u8 b;
     u8 a;
+}
+
+unittest {
+    auto c = Color(1, 2, 3, 4);
+    assert(c.r == 1);
+    assert(c.g == 2);
+    assert(c.b == 3);
+    assert(c.a == 4);
 }
 
 struct Rect {
@@ -59,4 +83,10 @@ enum MouseButton {
     left,
     right,
     middle,
+}
+
+unittest {
+    assert(GER_OK == 0);
+    assert(Key.space == Key.space);
+    assert(MouseButton.left == MouseButton.left);
 }

@@ -178,6 +178,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{0E6B096A-E214-3D2E-89DE-C3217ECFD529}</Project>
       <Name>ger_lua</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\Rebon402\Documents\project-github\GameEngineRuntime\build\_lua_host\lua.vcxproj">
+      <Project>{57892D63-4FFB-34CF-86D3-3AE6DAE95B6D}</Project>
+      <Name>lua</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

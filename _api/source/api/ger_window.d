@@ -1,10 +1,10 @@
 module api.ger_window;
 
 import api.ger_types;
-import core_sys = core;
+import std.string : toStringz;
 
 extern(C) {
-    struct ger_window_desc {
+    struct ger_window_desc { // @suppress(dscanner.style.phobos_naming_convention)
         const(char)* title;
         i32 width;
         i32 height;
@@ -13,7 +13,7 @@ extern(C) {
         u8 resizable;
     }
 
-    i32 ger_window_create(ger_window_desc* desc, void** out);
+    i32 ger_window_create(ger_window_desc* desc, void** output);
     void ger_window_destroy(void* win);
     void ger_window_poll_events(void* win);
     u8 ger_window_should_close(void* win);
@@ -30,7 +30,7 @@ class Window {
         _width = width;
         _height = height;
         ger_window_desc desc;
-        desc.title = title.ptr;
+        desc.title = title.toStringz;
         desc.width = width;
         desc.height = height;
         desc.fullscreen = fullscreen ? 1 : 0;

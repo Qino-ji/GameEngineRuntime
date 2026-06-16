@@ -7,12 +7,16 @@
     "targetType": "executable",
     "sourcePaths": ["source"],
     "importPaths": ["source"],
-    "dependencies": {
-        "ger_api": "../_api",
-        "ger_2d": "../_2d"
-    },
+    "dependencies": {},
+    "pathDependencies": ["../_api", "../_2d"],
+    "dflags-windows-msvc-ldc": [
+        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/Debug",
+        "-L/LIBPATH:C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/Debug",
+        "-Lger_core.lib",
+        "-Lger_lua.lib"
+    ],
     "configurations": [
-        {"name": "debug", "buildOptions": ["debugMode", "debugInfo"]},
-        {"name": "release", "buildOptions": ["releaseMode", "optimize", "inline"]}
+        {"name": "debug", "buildType": "debug"},
+        {"name": "release", "buildType": "release"}
     ]
 }

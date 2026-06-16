@@ -1,0 +1,29 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  windows-nightly:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure CMake
+        run: cmake -B build
+      - name: Build CMake
+        run: cmake --build build --config Debug
+      - name: Setup LDC
+        uses: dlang-community/setup-dlang@v1
+        with:
+          compiler: ldc-latest
+      - name: Test API
+        run: dub test --build=debug --force
+        working-directory: api
+      - name: Test 2D
+        run: dub test --build=debug --force
+        working-directory: engine2d
+      - name: Build runtime
+        run: dub build --build=debug --force
+        working-directory: runtime

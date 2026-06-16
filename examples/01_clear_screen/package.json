@@ -1,0 +1,12 @@
+{
+    "name": "example_01_clear_screen",
+    "description": "Clear screen smoke example",
+    "authors": ["GameEngineRuntime"],
+    "license": "MIT",
+    "targetType": "executable",
+    "sourcePaths": ["source"],
+    "importPaths": ["source", "../../api/source"],
+    "dependencies": {
+        "ger_api": {"path": "../../api"}
+    }
+}

@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure CMake
+        run: cmake -B build
+      - name: Build CMake
+        run: cmake --build build --config Debug
+      - name: Test CMake
+        run: ctest --test-dir build --output-on-failure
+      - name: Setup LDC
+        uses: dlang-community/setup-dlang@v1
+        with:
+          compiler: ldc-latest
+      - name: Test API
+        run: dub test --build=debug --force
+        working-directory: api
+      - name: Test 2D
+        run: dub test --build=debug --force
+        working-directory: engine2d
+      - name: Build runtime
+        run: dub build --build=debug --force
+        working-directory: runtime
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure minimal CMake
+        run: cmake -B build
+      - name: Build minimal CMake
+        run: cmake --build build

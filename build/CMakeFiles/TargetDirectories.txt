@@ -1,9 +1,0 @@
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/CMakeFiles/ger_core.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_core/CMakeFiles/ALL_BUILD.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_engine/CMakeFiles/ger_engine.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_engine/CMakeFiles/ALL_BUILD.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/CMakeFiles/lua.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/CMakeFiles/ger_lua.dir
-C:/Users/Rebon402/Documents/project-github/GameEngineRuntime/build/_lua_host/CMakeFiles/ALL_BUILD.dir

@@ -4,6 +4,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 struct ger_window {
@@ -42,7 +43,13 @@ ger_error_t ger_window_create(ger_window_desc_t* desc, ger_window_t** out) {
     wc.hInstance = inst;
     wc.hCursor = LoadCursorA(0, IDC_ARROW);
     wc.lpszClassName = "GER_WINDOW";
-    RegisterClassExA(&wc);
+    if (!RegisterClassExA(&wc)) {
+        DWORD err = GetLastError();
+        if (err != ERROR_CLASS_ALREADY_EXISTS) {
+            fprintf(stderr, "[ger] RegisterClassExA failed: %lu\n", err);
+            return GER_ERR_UNKNOWN;
+        }
+    }
 
     DWORD style = WS_OVERLAPPEDWINDOW;
     if (desc->resizable) style |= WS_SIZEBOX;
@@ -55,7 +62,12 @@ ger_error_t ger_window_create(ger_window_desc_t* desc, ger_window_t** out) {
         style, CW_USEDEFAULT, CW_USEDEFAULT,
         r.right - r.left, r.bottom - r.top,
         0, 0, inst, 0);
-    if (!hwnd) return GER_ERR_UNKNOWN;
+    if (!hwnd) {
+        DWORD err = GetLastError();
+        fprintf(stderr, "[ger] CreateWindowExA failed: %lu style=0x%08lx size=%ldx%ld\n",
+            err, style, desc->width, desc->height);
+        return GER_ERR_UNKNOWN;
+    }
 
     ger_window_t* win = (ger_window_t*)calloc(1, sizeof(ger_window_t));
     if (!win) { DestroyWindow(hwnd); return GER_ERR_OUT_OF_MEMORY; }
@@ -79,7 +91,7 @@ void ger_window_destroy(ger_window_t* win) {
 }
 
 void ger_window_poll_events(ger_window_t* win) {
-    (void)win;
+    if (!win) return;
     MSG msg;
     while (PeekMessageA(&msg, 0, 0, 0, PM_REMOVE)) {
         TranslateMessage(&msg);
@@ -88,16 +100,17 @@ void ger_window_poll_events(ger_window_t* win) {
 }
 
 ger_u8 ger_window_should_close(ger_window_t* win) {
-    return win->should_close;
+    return win ? win->should_close : 1;
 }
 
 void ger_window_get_size(ger_window_t* win, ger_i32* w, ger_i32* h) {
+    if (!win) { if (w) *w = 0; if (h) *h = 0; return; }
     if (w) *w = win->width;
     if (h) *h = win->height;
 }
 
 uintptr_t ger_window_get_native_handle(ger_window_t* win) {
-    return (uintptr_t)win->hwnd;
+    return win ? (uintptr_t)win->hwnd : 0;
 }
 
 #else

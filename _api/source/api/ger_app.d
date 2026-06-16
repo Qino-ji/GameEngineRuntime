@@ -3,6 +3,8 @@ module api.ger_app;
 import api.ger_window;
 import api.ger_input;
 import api.ger_types;
+import core.thread : Thread;
+import std.datetime : dur;
 
 abstract class App {
     protected Window window;
@@ -19,12 +21,14 @@ abstract class App {
         running = true;
         on_init();
 
-        while (!window.shouldClose() && running) {
+        while (running) {
+            if (window.shouldClose()) break;
             input.beginFrame();
             window.pollEvents();
             update(0.016f);
             render();
             input.endFrame();
+            Thread.sleep(dur!"msecs"(1));
         }
     }
 

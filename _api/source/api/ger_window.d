@@ -37,7 +37,9 @@ class Window {
         desc.vsync = vsync ? 1 : 0;
         desc.resizable = resizable ? 1 : 0;
         auto err = ger_window_create(&desc, &_handle);
-        assert(err == GER_OK, "Window creation failed");
+        if (err != GER_OK) {
+            throw new Exception("Window creation failed");
+        }
     }
 
     ~this() {

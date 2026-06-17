@@ -12,6 +12,10 @@ set(ENGINE_SRC
     src/math_simd.cpp
 )
 
+if(GER_ENABLE_REAL_WGPU)
+    list(APPEND ENGINE_SRC src/wgpu_proc_table.cpp)
+endif()
+
 add_library(ger_engine STATIC ${ENGINE_SRC})
 target_include_directories(ger_engine PUBLIC include
     PRIVATE ${CMAKE_SOURCE_DIR}/_deps/wgpu-native/ffi

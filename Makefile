@@ -24,7 +24,7 @@ clean:
 	cd engine2d && dub clean
 
 test:
-	cd build/debug && ctest --output-on-failure
+	cd build/debug && ctest -C Debug --output-on-failure
 	cd api && dub test --build=debug
 	cd engine2d && dub test --build=debug
 
